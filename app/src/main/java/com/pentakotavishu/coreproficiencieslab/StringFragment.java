@@ -1,71 +1,62 @@
 package com.pentakotavishu.coreproficiencieslab;
-
-import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.pentakotavishu.coreproficiencieslab.dummy.DummyContent;
+import androidx.fragment.app.Fragment;
 
-/**
- * A fragment representing a list of Items.
- */
 public class StringFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
+    private static StringFragment instance;
+    private TextView winterVote, springVote, summerVote, fallVote;
+    private int count;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public StringFragment() {
-    }
+        View v = inflater.inflate(R.layout.fragment_item, parent, false);
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static StringFragment newInstance(int columnCount) {
-        StringFragment fragment = new StringFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
+        winterVote = v.findViewById(R.id.winter_votes);
+        springVote = v.findViewById(R.id.spring_votes);
+        summerVote = v.findViewById(R.id.summer_votes);
+        fallVote = v.findViewById(R.id.fall_votes);
+        count = 0;
+
+        instance = this;
+
+        return v;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item_list, container, false);
+    public static StringFragment getInstance() {
+        return instance;
+    }
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyStringRecyclerViewAdapter(DummyContent.ITEMS));
+
+    public void updateVotes(String season){
+        if(season.equalsIgnoreCase("winter")){
+            count = Integer.parseInt(winterVote.getText().toString());
+            count = count + 1;
+            winterVote.setText(Integer.toString(count));
         }
-        return view;
+        if(season.equalsIgnoreCase("spring")){
+            count = Integer.parseInt(springVote.getText().toString());
+            count = count + 1;
+            springVote.setText(Integer.toString(count));
+        }
+        if(season.equalsIgnoreCase("summer")){
+            count = Integer.parseInt(summerVote.getText().toString());
+            count = count + 1;
+            summerVote.setText(Integer.toString(count));
+        }
+        if(season.equalsIgnoreCase("fall")){
+            count = Integer.parseInt(fallVote.getText().toString());
+            count = count + 1;
+            fallVote.setText(Integer.toString(count));
+        }
     }
 }
