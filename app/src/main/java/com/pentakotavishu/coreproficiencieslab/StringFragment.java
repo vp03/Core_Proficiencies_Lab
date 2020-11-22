@@ -37,26 +37,13 @@ public class StringFragment extends Fragment {
     }
 
 
-    public void updateVotes(String season){
-        if(season.equalsIgnoreCase("winter")){
-            count = Integer.parseInt(winterVote.getText().toString());
-            count = count + 1;
-            winterVote.setText(Integer.toString(count));
+    public void updateVotes(String[] season){
+
+        winterVote.setText(season[0]);
+        springVote.setText(season[1]);
+        summerVote.setText(season[2]);
+        fallVote.setText(season[3]);
         }
-        if(season.equalsIgnoreCase("spring")){
-            count = Integer.parseInt(springVote.getText().toString());
-            count = count + 1;
-            springVote.setText(Integer.toString(count));
-        }
-        if(season.equalsIgnoreCase("summer")){
-            count = Integer.parseInt(summerVote.getText().toString());
-            count = count + 1;
-            summerVote.setText(Integer.toString(count));
-        }
-        if(season.equalsIgnoreCase("fall")){
-            count = Integer.parseInt(fallVote.getText().toString());
-            count = count + 1;
-            fallVote.setText(Integer.toString(count));
-        }
-    }
+
+
 }
